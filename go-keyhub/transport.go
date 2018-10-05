@@ -16,8 +16,9 @@
 package keyhub
 
 import (
-	"golang.org/x/oauth2"
 	"net/http"
+
+	"golang.org/x/oauth2"
 )
 
 type Transport struct {

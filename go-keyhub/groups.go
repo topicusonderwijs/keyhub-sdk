@@ -17,6 +17,7 @@ package keyhub
 
 import (
 	"errors"
+
 	"github.com/dghubble/sling"
 )
 
