@@ -19,10 +19,7 @@ import (
 	"errors"
 	"net/http"
 	"net/url"
-
 	"github.com/dghubble/sling"
-
-	log "github.com/sirupsen/logrus"
 )
 
 type vaultRecords struct {
