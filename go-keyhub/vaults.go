@@ -17,10 +17,11 @@ package keyhub
 
 import (
 	"errors"
-	"github.com/dghubble/sling"
 	"net/http"
 	"net/url"
-	
+
+	"github.com/dghubble/sling"
+
 	log "github.com/sirupsen/logrus"
 )
 
@@ -43,15 +44,20 @@ type VaultRecord struct {
 		Secret struct {
 			Password string `json:"password"`
 			File     []byte `json:"file"`
+			Comment  string `json:"comment"`
 		} `json:"secret"`
 	} `json:"additionalObjects"`
 }
 
-func (r *VaultRecord) Password() (string) {
+func (r *VaultRecord) Comment() string {
+	return r.AdditionalObjects.Secret.Comment
+}
+
+func (r *VaultRecord) Password() string {
 	return r.AdditionalObjects.Secret.Password
 }
 
-func (r *VaultRecord) File() ([]byte) {
+func (r *VaultRecord) File() []byte {
 	return r.AdditionalObjects.Secret.File
 }
 
@@ -65,14 +71,6 @@ func newVaultService(sling *sling.Sling, client *http.Client) *VaultService {
 		sling:  sling,
 		client: client,
 	}
-}
-
-// TEST ONLY
-func (s *VaultService) GetRecordJSON(g *Group) (*http.Response, error) {
-	uri, _ := url.Parse(g.Links[0].Href)
-	uristring := "https://keyhub.topicusonderwijs.nl" + uri.Path + "/vault"
-	log.Infof("%s", uristring)
-	return s.client.Get(uristring)
 }
 
 // Retrieve all vault records for a group (secrets are not included)
