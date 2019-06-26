@@ -14,7 +14,7 @@ Basic usage:
 
     print(keyhub_client.info())
 
-    keyhub_client.get_group('<group uuid>'
+    keyhub_client.get_group('<group uuid>')
 
     keyhub_client.get_vault_records('<group uuid>')
 
